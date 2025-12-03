@@ -28,7 +28,7 @@ graph TD
   DuckDB -->|Hospital Results| BAML_Synth
   BAML_Synth -->|Natural Language Response| TTS
 
-  TTS -->|Audio Stream (MP3)| User
+  TTS -->|Audio Stream MP3| User
 
   style API fill:#f9f,stroke:#333,stroke-width:2px
   style DuckDB fill:#ff9,stroke:#333,stroke-width:2px
