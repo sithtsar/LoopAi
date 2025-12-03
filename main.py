@@ -101,19 +101,25 @@ async def process_query(user_text: str, session_id: str):
         print(f"Executing Search Tool: {decision.search}")
         
         # Construct SQL securely. DuckDB handles the CSV query efficiently.
-        query = "SELECT * FROM hospitals WHERE 1=1"
+        base_query_conditions = " WHERE 1=1"
         if decision.search.city:
-            query += f" AND city ILIKE '%{decision.search.city}%'"
+            base_query_conditions += f" AND city ILIKE '%{decision.search.city}%'"
         if decision.search.hospital_name:
-            query += f" AND name ILIKE '%{decision.search.hospital_name}%'"
+            base_query_conditions += f" AND name ILIKE '%{decision.search.hospital_name}%'"
+
+        if decision.search.is_count_query:
+            query = f"SELECT COUNT(*) FROM hospitals {base_query_conditions}"
+            print(f"Executing SQL Query: {query}")
+            count_result = con.execute(query).fetchone()[0]
+            results = f"Total count found: {count_result}"
+        else:
+            query = f"SELECT * FROM hospitals {base_query_conditions}"
+            # Limit results based on user request or default to 5
+            limit = decision.search.limit if decision.search.limit else 5
+            query += f" LIMIT {limit}"
             
-        # Limit results based on user request or default to 5
-        limit = decision.search.limit if decision.search.limit else 5
-        query += f" LIMIT {limit}"
-        
-        print(f"Executing SQL Query: {query}")
-            
-        results = con.execute(query).fetchall()
+            print(f"Executing SQL Query: {query}")
+            results = con.execute(query).fetchall()
         
         # --- STEP 4: Synthesis (BAML) ---
         # Llama 3.3 generates the answer using the fetched data

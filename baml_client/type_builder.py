@@ -108,7 +108,7 @@ class SearchParamsAst:
     def __init__(self, tb: type_builder.TypeBuilder):
         _tb = tb._tb # type: ignore (we know how to use this private attribute)
         self._bldr = _tb.class_("SearchParams")
-        self._properties: typing.Set[str] = set([  "city",  "hospital_name",  "limit",  ])
+        self._properties: typing.Set[str] = set([  "city",  "hospital_name",  "limit",  "is_count_query",  ])
         self._props = SearchParamsProperties(self._bldr, self._properties)
 
     def type(self) -> baml_py.FieldType:
@@ -147,6 +147,10 @@ class SearchParamsProperties:
     @property
     def limit(self) -> type_builder.ClassPropertyViewer:
         return type_builder.ClassPropertyViewer(self.__bldr.property("limit"))
+    
+    @property
+    def is_count_query(self) -> type_builder.ClassPropertyViewer:
+        return type_builder.ClassPropertyViewer(self.__bldr.property("is_count_query"))
     
     
 

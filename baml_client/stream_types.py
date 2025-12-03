@@ -36,6 +36,7 @@ class SearchParams(BaseModel):
     city: typing.Optional[str] = None
     hospital_name: typing.Optional[str] = None
     limit: typing.Optional[int] = None
+    is_count_query: typing.Optional[bool] = None
 
 # #########################################################################
 # Generated type aliases (0)
