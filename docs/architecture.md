@@ -7,7 +7,7 @@ The VAI application follows a modular architecture separating the frontend inter
 ```mermaid
 graph TD
 
-  User[User (Frontend)]
+  User[User Frontend]
 
   subgraph FastAPI_Backend[FastAPI Backend]
     API[API Endpoint (/talk)]
