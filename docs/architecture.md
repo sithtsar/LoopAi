@@ -6,15 +6,16 @@ The VAI application follows a modular architecture separating the frontend inter
 
 ```mermaid
 graph TD
-  User[User\n(Frontend)]
+
+  User[User (Frontend)]
 
   subgraph FastAPI_Backend[FastAPI Backend]
     API[API Endpoint (/talk)]
-    STT[Groq STT\n(Whisper Large v3)]
-    BAML_Decision[BAML Logic\n(DecideAction / Llama 3.3)]
-    DuckDB[(DuckDB\nHospital Data)]
-    BAML_Synth[BAML Synthesis\n(GenerateSpeech / Llama 3.3)]
-    TTS[Groq TTS\n(PlayAI)]
+    STT[Groq STT (Whisper Large v3)]
+    BAML_Decision[BAML Logic (DecideAction / Llama 3.3)]
+    DuckDB[(DuckDB Hospital Data)]
+    BAML_Synth[BAML Synthesis (GenerateSpeech / Llama 3.3)]
+    TTS[Groq TTS (PlayAI)]
   end
 
   User -->|Microphone Audio| API
@@ -35,6 +36,7 @@ graph TD
   style TTS fill:#bbf,stroke:#333,stroke-width:2px
   style BAML_Decision fill:#bfb,stroke:#333,stroke-width:2px
   style BAML_Synth fill:#bfb,stroke:#333,stroke-width:2px
+
 ```
 
 ## Component Breakdown
