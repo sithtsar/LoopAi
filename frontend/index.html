@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop AI Hospital Network Assistant</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-aperture-icon lucide-aperture"><circle cx="12" cy="12" r="10"/><path d="m14.31 8 5.74 9.94"/><path d="M9.69 8h11.48"/><path d="m7.38 12 5.74-9.94"/><path d="M9.69 16 3.95 6.06"/><path d="M14.31 16H2.83"/><path d="m16.62 12-5.74 9.94"/></svg>
+                Loop AI Assistant
+            </div>
+        </header>
+
+        <main>
+            <div class="visualizer-container">
+                <canvas id="visualizer" width="640" height="160"></canvas>
+            </div>
+
+            <div class="status-container">
+                <p id="status">Ready to listen</p>
+            </div>
+
+            <div class="mic-wrapper">
+                <button id="micButton" aria-label="Toggle microphone">
+                    <!-- Mic Icon -->
+                    <svg class="mic-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    <!-- Stop Icon (Hidden by default, handled in JS by class switching or internal HTML replacement, but let's stick to one SVG for now and toggle class/state) -->
+                </button>
+            </div>
+
+            <div class="suggestions">
+                <div class="card" data-query="Tell me 3 hospitals around Bangalore.">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="card-text">Hospitals nearby</div>
+                    <div class="card-sub">"Tell me 3 hospitals around Bangalore."</div>
+                </div>
+
+                <div class="card" data-query="Can you confirm if Manipal Sarjapur in Bangalore is in my network?">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="card-text">Check Network Status</div>
+                    <div class="card-sub">"Is Manipal Sarjapur in my network?"</div>
+                </div>
+
+                <div class="card" data-query="What's the weather today?">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/><circle cx="12" cy="12" r="5"/></svg>
+                    </div>
+                    <div class="card-text">Weather Check</div>
+                    <div class="card-sub">Test out-of-scope queries</div>
+                </div>
+            </div>
+
+            <audio id="audioPlayer" style="display: none;"></audio>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
