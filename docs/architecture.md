@@ -10,12 +10,12 @@ graph TD
   User[User Frontend]
 
   subgraph FastAPI_Backend[FastAPI Backend]
-    API[API Endpoint (/talk)]
-    STT[Groq STT (Whisper Large v3)]
-    BAML_Decision[BAML Logic (DecideAction / Llama 3.3)]
+    API[API Endpoint /talk]
+    STT[Groq STT Whisper Large v3]
+    BAML_Decision[BAML Logic DecideAction / Llama 3.3]
     DuckDB[(DuckDB Hospital Data)]
-    BAML_Synth[BAML Synthesis (GenerateSpeech / Llama 3.3)]
-    TTS[Groq TTS (PlayAI)]
+    BAML_Synth[BAML Synthesis GenerateSpeech / Llama 3.3]
+    TTS[Groq TTS PlayAI]
   end
 
   User -->|Microphone Audio| API
