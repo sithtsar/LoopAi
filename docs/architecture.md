@@ -6,35 +6,35 @@ The VAI application follows a modular architecture separating the frontend inter
 
 ```mermaid
 graph TD
-    User[User (Frontend)]
-    
-    subgraph "FastAPI Backend"
-        API[API Endpoint (/talk)]
-        STT[Groq STT\n(Whisper Large v3)]
-        BAML_Decision[BAML Logic\n(DecideAction / Llama 3.3)]
-        DuckDB[(DuckDB\nHospital Data)]
-        BAML_Synth[BAML Synthesis\n(GenerateSpeech / Llama 3.3)]
-        TTS[Groq TTS\n(PlayAI)]
-    end
+  User[User\n(Frontend)]
 
-    User -- "Microphone Audio" --> API
-    API -- "Audio Bytes" --> STT
-    STT -- "Transcribed Text" --> BAML_Decision
-    
-    BAML_Decision -- "Search Query" --> DuckDB
-    BAML_Decision -- "Direct Reply/Clarification" --> TTS
-    
-    DuckDB -- "Hospital Results" --> BAML_Synth
-    BAML_Synth -- "Natural Language Response" --> TTS
-    
-    TTS -- "Audio Stream (MP3)" --> User
-    
-    style API fill:#f9f,stroke:#333,stroke-width:2px
-    style DuckDB fill:#ff9,stroke:#333,stroke-width:2px
-    style STT fill:#bbf,stroke:#333,stroke-width:2px
-    style TTS fill:#bbf,stroke:#333,stroke-width:2px
-    style BAML_Decision fill:#bfb,stroke:#333,stroke-width:2px
-    style BAML_Synth fill:#bfb,stroke:#333,stroke-width:2px
+  subgraph FastAPI_Backend[FastAPI Backend]
+    API[API Endpoint (/talk)]
+    STT[Groq STT\n(Whisper Large v3)]
+    BAML_Decision[BAML Logic\n(DecideAction / Llama 3.3)]
+    DuckDB[(DuckDB\nHospital Data)]
+    BAML_Synth[BAML Synthesis\n(GenerateSpeech / Llama 3.3)]
+    TTS[Groq TTS\n(PlayAI)]
+  end
+
+  User -->|Microphone Audio| API
+  API -->|Audio Bytes| STT
+  STT -->|Transcribed Text| BAML_Decision
+
+  BAML_Decision -->|Search Query| DuckDB
+  BAML_Decision -->|Direct Reply / Clarification| TTS
+
+  DuckDB -->|Hospital Results| BAML_Synth
+  BAML_Synth -->|Natural Language Response| TTS
+
+  TTS -->|Audio Stream (MP3)| User
+
+  style API fill:#f9f,stroke:#333,stroke-width:2px
+  style DuckDB fill:#ff9,stroke:#333,stroke-width:2px
+  style STT fill:#bbf,stroke:#333,stroke-width:2px
+  style TTS fill:#bbf,stroke:#333,stroke-width:2px
+  style BAML_Decision fill:#bfb,stroke:#333,stroke-width:2px
+  style BAML_Synth fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 ## Component Breakdown
